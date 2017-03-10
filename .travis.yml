@@ -1,0 +1,18 @@
+language: go
+matrix:
+  include:
+    - go: 1.7
+    - go: 1.7.5
+    - go: 1.8
+    - go: tip
+  allow_failures:
+    - go: tip
+sudo: true
+before_install:
+  - sudo add-apt-repository ppa:masterminds/glide -y
+  - sudo apt-get update -q
+  - sudo apt-get install glide -y
+install:
+  - glide install
+script:
+  - go test -v $(glide novendor)
